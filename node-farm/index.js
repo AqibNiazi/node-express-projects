@@ -1,6 +1,7 @@
 const fs = require(`fs`);
 const http = require(`http`);
 const url = require("url");
+const slugify = require("slugify");
 // Blocking, synchronous way
 // const textIn = fs.readFileSync(`./txt/input.txt`, `utf-8`);
 // console.log(textIn);
@@ -54,6 +55,11 @@ const productData = JSON.parse(data);
 const server = http.createServer((req, res) => {
   const { query, pathname } = url.parse(req.url, true);
 
+  console.log(slugify("Fresh Avocado", { lower: true }));
+  const slugs = productData.map((el) =>
+    slugify(el.productName, { lower: true })
+  );
+  console.log(slugs);
   //Overview Page
   if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, {
