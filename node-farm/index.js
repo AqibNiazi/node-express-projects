@@ -1,5 +1,6 @@
 const fs = require(`fs`);
 const http = require(`http`);
+const url = require("url");
 // Blocking, synchronous way
 // const textIn = fs.readFileSync(`./txt/input.txt`, `utf-8`);
 // console.log(textIn);
@@ -51,10 +52,10 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const productData = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
+  const { query, pathname } = url.parse(req.url, true);
 
   //Overview Page
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, {
       "Content-type": "text/html",
     });
@@ -66,11 +67,17 @@ const server = http.createServer((req, res) => {
     res.end(output);
 
     //Product Page
-  } else if (pathName === "/product") {
-    res.end("This is the PRODUCT");
+  } else if (pathname === "/product") {
+    res.writeHead(200, {
+      "Content-type": "text/html",
+    });
+
+    const product = productData[query.id];
+    const output = replaceTemplate(tempProduct, product);
+    res.end(output);
 
     // Api
-  } else if (pathName === "/api") {
+  } else if (pathname === "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(data);
 
