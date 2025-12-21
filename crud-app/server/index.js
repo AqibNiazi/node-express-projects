@@ -11,6 +11,7 @@ const {
   updateUser,
   getUsers,
   getUserById,
+  deleteUser,
 } = require("./src/requests/userRequests");
 
 // Middlewares
@@ -27,6 +28,7 @@ app.get("/users", getUsers);
 app.get("/user/:id", getUserById);
 app.post("/create-user", createUser);
 app.put("/update-user/:id", updateUser);
+app.delete("/delete-user/:id", deleteUser);
 
 const NodeJsServer = async () => {
   try {
