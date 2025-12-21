@@ -1,13 +1,14 @@
 import React from "react";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "../layout/AppLayout";
-import Users from "../components/Users";
-import CreateUsers from "../components/CreateUsers";
-import UpdateUsers from "../components/UpdateUsers";
+import Users from "../components/users";
+import CreateUsers from "../components/create-user";
+import UpdateUsers from "../components/update-user";
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/users",
       element: <AppLayout />,
       children: [
         {
@@ -17,11 +18,11 @@ const AppRoutes = () => {
       ],
     },
     {
-      path: "/create",
+      path: "/create-user",
       element: <CreateUsers />,
     },
     {
-      path: "/update",
+      path: "/update-user",
       element: <UpdateUsers />,
     },
   ]);
