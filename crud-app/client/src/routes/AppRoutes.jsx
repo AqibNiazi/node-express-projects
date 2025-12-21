@@ -22,7 +22,7 @@ const AppRoutes = () => {
       element: <CreateUsers />,
     },
     {
-      path: "/update-user",
+      path: "/update-user/:id",
       element: <UpdateUsers />,
     },
   ]);

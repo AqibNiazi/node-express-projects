@@ -38,7 +38,6 @@ const CreateUsers = () => {
       }
 
       const data = await response.json();
-      console.log("Data in Create user", data);
 
       setStatus({ loading: false, error: null, success: true });
       setUser({ name: "", email: "", age: "" }); // Reset form on success
@@ -59,7 +58,7 @@ const CreateUsers = () => {
           htmlFor="name"
           className="block mb-2.5 text-sm font-medium text-heading"
         >
-          Your Name
+          Name
         </label>
         <input
           type="text"
@@ -77,7 +76,7 @@ const CreateUsers = () => {
           htmlFor="email"
           className="block mb-2.5 text-sm font-medium text-heading"
         >
-          Your email
+          Email
         </label>
         <input
           type="email"
@@ -95,7 +94,7 @@ const CreateUsers = () => {
           htmlFor="age"
           className="block mb-2.5 text-sm font-medium text-heading"
         >
-          Your Age
+          Age
         </label>
         <input
           type="number"

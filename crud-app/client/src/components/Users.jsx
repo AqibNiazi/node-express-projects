@@ -24,8 +24,9 @@ const Users = () => {
     };
     fetchUsers();
   }, []);
-  const handleEdit = () => {
-    navigate(`/update-user`);
+  const handleEdit = (id) => {
+    console.log("user id",id);
+    navigate(`/update-user/${id}`);
   };
   if (loading) {
     return <div className="text-center">Loading users...</div>;
@@ -68,7 +69,7 @@ const Users = () => {
               <td className="px-6 py-4">
                 <button
                   className="px-2 py-1 bg-green-400 text-white mx-1 cursor-pointer rounded-sm"
-                  onClick={handleEdit}
+                  onClick={()=>handleEdit(user._id)}
                 >
                   Edit
                 </button>
