@@ -10,6 +10,7 @@ const {
   createUser,
   updateUser,
   getUsers,
+  getUserById,
 } = require("./src/requests/userRequests");
 
 // Middlewares
@@ -23,8 +24,9 @@ app.use(bodyParser.json());
 
 // Routes
 app.get("/users", getUsers);
+app.get("/user/:id", getUserById);
 app.post("/create-user", createUser);
-app.put("/update-user", updateUser);
+app.put("/update-user/:id", updateUser);
 
 const NodeJsServer = async () => {
   try {
