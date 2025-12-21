@@ -24,6 +24,8 @@ const Users = () => {
     };
     fetchUsers();
   }, []);
+
+  // hanlde editing of user information
   const handleEdit = (id) => {
     console.log("user id",id);
     navigate(`/update-user/${id}`);
@@ -35,6 +37,20 @@ const Users = () => {
   if (error) {
     return <div className="text-center text-red-500">Error: {error}</div>;
   }
+
+const handleDelete = (id) => { 
+  
+  console.log("user id in delete",id);
+  fetch(`http://localhost:3000/delete-user/${id}`, {
+    method: "DELETE",
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("data",data);
+    setUsers(users.filter((user) => user._id !== id));
+  })
+  .catch((err) => console.log(err));
+ }
 
   return (
     <div className="w-fit mx-auto overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
@@ -73,7 +89,7 @@ const Users = () => {
                 >
                   Edit
                 </button>
-                <button className="px-2 py-1 bg-red-400 text-white mx-1 cursor-pointer rounded-sm">
+                <button className="px-2 py-1 bg-red-400 text-white mx-1 cursor-pointer rounded-sm" onClick={(e)=>handleDelete(user._id)}>
                   Delete
                 </button>
               </td>
