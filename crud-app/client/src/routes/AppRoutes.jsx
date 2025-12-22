@@ -1,10 +1,10 @@
 import React from "react";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "../layout/AppLayout";
 import Users from "../components/users";
 import CreateUsers from "../components/create-user";
 import UpdateUsers from "../components/update-user";
+
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
@@ -12,30 +12,25 @@ const AppRoutes = () => {
       element: <AppLayout />,
       children: [
         {
-          index: true,
+          index: true, // "/"
           element: <Users />,
         },
-      ],
-    },
-    {
-      path: "/users",
-      element: <AppLayout />,
-      children: [
         {
-          index: true,
+          path: "users", // "/users"
           element: <Users />,
         },
+        {
+          path: "create-user",
+          element: <CreateUsers />,
+        },
+        {
+          path: "update-user/:slug",
+          element: <UpdateUsers />,
+        },
       ],
-    },
-    {
-      path: "/create-user",
-      element: <CreateUsers />,
-    },
-    {
-      path: "/update-user/:slug",
-      element: <UpdateUsers />,
     },
   ]);
+
   return <RouterProvider router={router} />;
 };
 
