@@ -1,8 +1,18 @@
 const UserModel = require("../models/Users");
+const slugify = require("slugify");
 
 const createUser = async (req, res) => {
   try {
-    const user = await UserModel.create(req.body);
+    const slug = slugify(req.body.name, {
+      lower: true,
+      strict: true,
+    });
+
+    const user = await UserModel.create({
+      ...req.body,
+      slug,
+    });
+
     res.status(201).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -32,11 +42,33 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const id = req.params.id;
-    const updateData = req.body;
-    const user = await UserModel.findByIdAndUpdate(id, updateData, {
-      new: true,
+    const slug = slugify(req.body.name, {
+      lower: true,
+      strict: true,
     });
+
+    const user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...req.body,
+        slug,
+      },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getUserBySlug = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ slug: req.params.slug });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -59,4 +91,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, updateUser, getUsers, getUserById, deleteUser };
+module.exports = {
+  createUser,
+  updateUser,
+  getUsers,
+  getUserById,
+  getUserBySlug,
+  deleteUser,
+};

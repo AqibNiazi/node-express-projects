@@ -10,8 +10,8 @@ const {
   createUser,
   updateUser,
   getUsers,
-  getUserById,
   deleteUser,
+  getUserBySlug,
 } = require("./src/requests/userRequests");
 
 // Middlewares
@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.get("/users", getUsers);
-app.get("/user/:id", getUserById);
+app.get("/user/:slug", getUserBySlug);
 app.post("/create-user", createUser);
 app.put("/update-user/:id", updateUser);
 app.delete("/delete-user/:id", deleteUser);
