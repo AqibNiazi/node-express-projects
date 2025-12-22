@@ -8,6 +8,16 @@ import UpdateUsers from "../components/update-user";
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
+      path: "/",
+      element: <AppLayout />,
+      children: [
+        {
+          index: true,
+          element: <Users />,
+        },
+      ],
+    },
+    {
       path: "/users",
       element: <AppLayout />,
       children: [
@@ -22,7 +32,7 @@ const AppRoutes = () => {
       element: <CreateUsers />,
     },
     {
-      path: "/update-user/:id",
+      path: "/update-user/:slug",
       element: <UpdateUsers />,
     },
   ]);
