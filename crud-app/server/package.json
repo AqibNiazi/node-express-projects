@@ -1,23 +1,17 @@
 {
-  "name": "server",
+  "name": "crud-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "main": "api/index.js",
   "type": "commonjs",
+  "scripts": {
+    "start": "node api/index.js"
+  },
   "dependencies": {
-    "body-parser": "^2.2.1",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "mongoose": "^9.0.1",
-    "nodemon": "^3.1.11",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.0",
     "slugify": "^1.6.6"
   }
 }

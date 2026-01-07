@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { clientBaseURL, clientEndPoints } from "../config";
 const CreateUsers = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -25,20 +26,7 @@ const CreateUsers = () => {
     setStatus({ loading: true, error: null, success: false });
 
     try {
-      const response = await fetch("http://localhost:3000/create-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create user");
-      }
-
-      const data = await response.json();
-
+      await clientBaseURL.post(clientEndPoints.createUser, user);
       setStatus({ loading: false, error: null, success: true });
       setUser({ name: "", email: "", age: "" }); // Reset form on success
       navigate("/users");
